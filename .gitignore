@@ -37,4 +37,4 @@ Thumbs.db
 ./source/**/site-packages/**
 
 # Temp files
-./build/
+./build/**
