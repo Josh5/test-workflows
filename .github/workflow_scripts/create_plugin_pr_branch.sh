@@ -5,7 +5,7 @@
 # File Created: Friday, 26th August 2022 8:17:10 pm
 # Author: Josh.5 (jsunnex@gmail.com)
 # -----
-# Last Modified: Friday, 26th August 2022 8:52:30 pm
+# Last Modified: Friday, 26th August 2022 8:54:45 pm
 # Modified By: Josh.5 (jsunnex@gmail.com)
 ###
 #
@@ -30,7 +30,7 @@ fi
 
 ########################################################################
 ### UPDATE SUBMODULES
-pushd "${plugin_location}" &> /dev/null
+pushd "${plugin_location}"
 # Update any submodules
 echo -e "\n*** Pulling plugin submodules"
 git submodule update --init --recursive 
@@ -39,7 +39,7 @@ popd &> /dev/null
 
 ########################################################################
 ### PATCH PROJECT
-pushd "${plugin_location}" &> /dev/null
+pushd "${plugin_location}"
 # Apply any patches
 if [[ -d ./patches ]]; then
     echo -e "\n*** Patching project"
@@ -50,9 +50,10 @@ popd &> /dev/null
 
 ########################################################################
 ### BUILD/INSTALL
-pushd "${repo_root_path}" &> /dev/null
+pushd "${repo_root_path}"
 # Install/update plugin files
 echo -e "\n*** Installing files from plugin git repo to this repository's source directory"
+mkdir -p "${repo_root_path}/source/${plugin_id}"
 rsync -avh --delete \
     --exclude='.git/' \
     --exclude='.gitmodules' \
@@ -66,7 +67,7 @@ popd &> /dev/null
 
 ########################################################################
 ### COMMIT
-pushd "${repo_root_path}" &> /dev/null
+pushd "${repo_root_path}"
 echo -e "\n*** Commit changes in unmanic-plugins repository"
 commit_message="[${plugin_id}] v${plugin_version}"
 echo ${commit_message}
