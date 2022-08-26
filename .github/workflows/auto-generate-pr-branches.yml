@@ -13,15 +13,34 @@ jobs:
 
   generate_pr_branches:
 
-    name: Auto generate PR branches
+    name: Check for Plugin Updates
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        plugin_id: 
+          - notify_radarr
 
     steps:
     # Fetch shallow git repository
-    - name: Checkout
+    - name: Checkout repo
       uses: actions/checkout@v2
 
-    - name: Process any updated plugins and generate PR branches 
-      if: success() || failure()
-      run: ./.github/workflow_scripts/process_any_updated_plugins.sh
+    - name: Checkout plugin
+      uses: actions/checkout@v2
+      with:
+        repository: Unmanic/plugin.${{ matrix.plugin_id }}
+        path: ./build/plugin.${{ matrix.plugin_id }}
+
+    - name: Process updates and generate PR branches
+      run: |
+        ./.github/workflow_scripts/create_plugin_pr_branch.sh "${{ matrix.plugin_id }}"
       shell: bash
+
+    # # Deploy to repo branch
+    # - name: Deploy repository
+    #   if: success()
+    #   uses: s0/git-publish-subdir-action@develop
+    #   env:
+    #     REPO: self
+    #     BRANCH: pr-${{ matrix.plugin_id }}
+    #     GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}

@@ -25,7 +25,7 @@ Thumbs.db
 *.wmv
 
 # Repo directory
-repo/
+./repo/
 
 # Scripts directory
 ./scripts/
@@ -34,4 +34,7 @@ repo/
 ./template/
 
 # Plugin site-packages
-source/**/site-packages/**
+./source/**/site-packages/**
+
+# Temp files
+./build/
