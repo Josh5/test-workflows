@@ -5,7 +5,7 @@
 # File Created: Friday, 26th August 2022 8:01:50 pm
 # Author: Josh.5 (jsunnex@gmail.com)
 # -----
-# Last Modified: Friday, 26th August 2022 8:04:19 pm
+# Last Modified: Friday, 26th August 2022 8:07:21 pm
 # Modified By: Josh.5 (jsunnex@gmail.com)
 ###
 
@@ -17,7 +17,6 @@ script_path=$(readlink -e $(dirname "${BASH_SOURCE[0]}")/)
 plugin_ids=(
     "notify_radarr"
 )
-chmod +x ./.github/workflows/scripts/create_plugin_pr_branch.sh
 for plugin_id in "${plugin_ids[@]}"; do
     "${script_path}"/create_plugin_pr_branch.sh "${plugin_id}"
 done

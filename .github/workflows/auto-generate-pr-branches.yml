@@ -21,7 +21,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Check .gitignore in all plugin folders
+    - name: Process any updated plugins and generate PR branches 
       if: success() || failure()
       run: ./.github/workflow_scripts/process_any_updated_plugins.sh
       shell: bash
