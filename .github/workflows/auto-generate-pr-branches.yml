@@ -1,0 +1,34 @@
+name: Auto generate PR branches
+
+on:
+  # TODO: Remove this push rule
+  push:
+    branches:
+      - 'master'
+  schedule:
+    # At 02:30 on Saturday
+    - cron:  '30 2 * * 6'
+
+jobs:
+
+  generate_pr_branches:
+
+    name: Auto generate PR branches
+    runs-on: ubuntu-latest
+
+    steps:
+    # Fetch shallow git repository
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Check .gitignore in all plugin folders
+      if: success() || failure()
+      run: |
+        # TODO: Read IDs from GitHub API
+        plugin_ids=(
+          "notify_radarr"
+        )
+        chmod +x ./.github/workflows/scripts/create_plugin_pr_branch.sh
+        for plugin_id in "${plugin_ids[@]}"; do
+          ./.github/workflows/scripts/create_plugin_pr_branch.sh "${plugin_id}"
+        done
