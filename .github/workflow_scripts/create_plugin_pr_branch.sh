@@ -5,7 +5,7 @@
 # File Created: Friday, 26th August 2022 8:17:10 pm
 # Author: Josh.5 (jsunnex@gmail.com)
 # -----
-# Last Modified: Friday, 26th August 2022 8:50:17 pm
+# Last Modified: Friday, 26th August 2022 8:51:34 pm
 # Modified By: Josh.5 (jsunnex@gmail.com)
 ###
 #
@@ -18,10 +18,6 @@ repo_root_path=$(readlink -e $(dirname "${BASH_SOURCE[0]}")/../../)
 
 plugin_id="${@}"
 plugin_location="${repo_root_path}/build/plugin.${plugin_id}"
-
-echo ${repo_root_path}
-ls -la ${repo_root_path}
-exit
 
 if [[ -z ${plugin_id} ]]; then
     echo "You forgot to provide the ID of one of your plugins..."
