@@ -5,7 +5,7 @@
 # File Created: Friday, 26th August 2022 8:17:10 pm
 # Author: Josh.5 (jsunnex@gmail.com)
 # -----
-# Last Modified: Friday, 26th August 2022 8:57:26 pm
+# Last Modified: Friday, 26th August 2022 8:59:59 pm
 # Modified By: Josh.5 (jsunnex@gmail.com)
 ###
 #
@@ -26,6 +26,15 @@ if [[ -z ${plugin_id} ]]; then
     echo "You forgot to provide the ID of one of your plugins..."
     exit 1
 fi
+
+
+########################################################################
+### CREATE PR BRANCH
+pushd "${repo_root_path}" &> /dev/null
+# Create PR branch 
+echo -e "\n*** Checkout PR branch for plugin"
+git checkout -b "pr-${plugin_id}"
+popd &> /dev/null
 
 
 ########################################################################
