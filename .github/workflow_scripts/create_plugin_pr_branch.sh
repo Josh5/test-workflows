@@ -5,7 +5,7 @@
 # File Created: Friday, 26th August 2022 8:17:10 pm
 # Author: Josh.5 (jsunnex@gmail.com)
 # -----
-# Last Modified: Friday, 26th August 2022 8:54:45 pm
+# Last Modified: Friday, 26th August 2022 8:57:26 pm
 # Modified By: Josh.5 (jsunnex@gmail.com)
 ###
 #
@@ -30,7 +30,7 @@ fi
 
 ########################################################################
 ### UPDATE SUBMODULES
-pushd "${plugin_location}"
+pushd "${plugin_location}" &> /dev/null
 # Update any submodules
 echo -e "\n*** Pulling plugin submodules"
 git submodule update --init --recursive 
@@ -39,7 +39,7 @@ popd &> /dev/null
 
 ########################################################################
 ### PATCH PROJECT
-pushd "${plugin_location}"
+pushd "${plugin_location}" &> /dev/null
 # Apply any patches
 if [[ -d ./patches ]]; then
     echo -e "\n*** Patching project"
@@ -50,7 +50,7 @@ popd &> /dev/null
 
 ########################################################################
 ### BUILD/INSTALL
-pushd "${repo_root_path}"
+pushd "${repo_root_path}" &> /dev/null
 # Install/update plugin files
 echo -e "\n*** Installing files from plugin git repo to this repository's source directory"
 mkdir -p "${repo_root_path}/source/${plugin_id}"
@@ -64,10 +64,13 @@ plugin_version=$(cat ${plugin_location}/info.json | jq -rc '.version')
 [[ ${plugin_version} == "null" ]] && echo "Failed to fetch the plugin's version from the info.json file. Exit!" && exit 1;
 popd &> /dev/null
 
+# TODO: Remove logging
+echo "${repo_root_path}/source/${plugin_id}"
+ls -la "${repo_root_path}/source/${plugin_id}"
 
 ########################################################################
 ### COMMIT
-pushd "${repo_root_path}"
+pushd "${repo_root_path}" &> /dev/null
 echo -e "\n*** Commit changes in unmanic-plugins repository"
 commit_message="[${plugin_id}] v${plugin_version}"
 echo ${commit_message}
