@@ -31,18 +31,10 @@ jobs:
         repository: Unmanic/plugin.${{ matrix.plugin_id }}
         path: ./build/plugin.${{ matrix.plugin_id }}
 
+    # Check for plugin updates and create a PR branch with any changes found
     - name: Process updates and generate PR branches
       run: |
         git config --global user.email "${GITHUB_ACTOR}"
         git config --global user.name "${GITHUB_ACTOR}@users.noreply.github.com"
         ./.github/workflow_scripts/create_plugin_pr_branch.sh "${{ matrix.plugin_id }}"
       shell: bash
-
-    # # Deploy to repo branch
-    # - name: Deploy repository
-    #   if: success()
-    #   uses: s0/git-publish-subdir-action@develop
-    #   env:
-    #     REPO: self
-    #     BRANCH: pr-${{ matrix.plugin_id }}
-    #     GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
