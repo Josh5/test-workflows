@@ -33,6 +33,8 @@ jobs:
 
     - name: Process updates and generate PR branches
       run: |
+        git config --global user.email "${GITHUB_ACTOR}"
+        git config --global user.name "${GITHUB_ACTOR}@users.noreply.github.com"
         ./.github/workflow_scripts/create_plugin_pr_branch.sh "${{ matrix.plugin_id }}"
       shell: bash
 
