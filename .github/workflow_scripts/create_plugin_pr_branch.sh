@@ -5,7 +5,7 @@
 # File Created: Friday, 26th August 2022 8:17:10 pm
 # Author: Josh.5 (jsunnex@gmail.com)
 # -----
-# Last Modified: Saturday, 27th August 2022 1:27:34 pm
+# Last Modified: Saturday, 27th August 2022 1:34:19 pm
 # Modified By: Josh.5 (jsunnex@gmail.com)
 ###
 #
@@ -103,4 +103,12 @@ if [[ $? -gt 0 ]]; then
     echo "PR branch will not be pushed." 
     exit 1
 fi
+popd &> /dev/null
+
+
+########################################################################
+### PUBLISH
+pushd "${repo_root_path}" &> /dev/null
+echo -e "\n*** Publish changes to origin unmanic-plugins repository"
+git push -f origin "pr-${plugin_id}"
 popd &> /dev/null
