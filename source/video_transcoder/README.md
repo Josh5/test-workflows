@@ -7,3 +7,4 @@ Plugin for [Unmanic](https://github.com/Unmanic)
 
 - [Description](description.md)
 - [Changelog](changelog.md)
+
